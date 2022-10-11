@@ -2,20 +2,31 @@
 using System.IO;
 using System.Text;
 
-namespace HelloWorld
+namespace FileTask1
 {
-    class Program
+
+
+class Prog
+{
+    const int POINTS_TO_PASS = 56;
+    static void Main()
     {
-        public static void Main(string[] args)
+        string inputFilePath = @"../input.txt";
+        string[] students = File.ReadAllLines(inputFilePath);
+
+        string[] studentInf;
+        for(int i = 0; i < students.Length; i++)
         {
-            string fileCont = File.ReadAllText(@"../1.dat");
-            string[] numSplit = fileCont.Split(new char[]('', '\t', '\r', '\n'), StringSplitOptions.RemoveEmptyEntries);
-            int[] integers = new int[numSplit.Length];
-            for(int i = 0; i < numSplit.Length; i++)
+            studentInf = students[i].Split(' ');
+            Console.Write($"Студент {studentInf[0]} {studentInf[1]} {studentInf[2]} ");
+            if(int.Parse(studentInf[3]) < POINTS_TO_PASS || int.Parse(studentInf[4]) < POINTS_TO_PASS
+                         || int.Parse(studentInf[5]) < POINTS_TO_PASS)
             {
-                integers[i] = int.Parse(numSplit[i]);
+                Console.WriteLine("не закрыл сессию!");
+            } else {
+                Console.WriteLine("закрыл сессию.");
             }
-            
-        }
+        } 
     }
+}
 }
