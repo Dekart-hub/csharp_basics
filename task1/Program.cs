@@ -31,31 +31,21 @@ class Prog
 
     static void task2()
     {
-        string[] content = File.ReadAllLines(INPUT_FILE_PATH);
-        int n = 0;
-        int count = 0;
-
-        while(n != content.Length)
+        using(StreamReader fr = new StreamReader(INPUT_FILE_PATH))
         {
-            count = int.Parse(content[n]);
-            for(int i = 0; i < count; i++)
+            string  line;
+            int n;
+            while((line = fr.ReadLine()) != null)
             {
-                for(int j = 0; j < count; j++)
+                n = int.Parse(line);
+                int[,] arr = new int[n, n];
+                for(int i = 0; i < n; i++)
                 {
-
+                    string col = fr.ReadLine();
+                    arr[i] = Array.ConvertAll(col.Split(' '), s =>  int.Parse(s, out var x) ? x : -1);
                 }
             }
-
         }
-        // using(FileStream fr = new FileStream(@"../input.txt", FileMode.Open))
-        // {
-        //   for(int offset=1; offset <= fr.Length; offset++)
-        //         {
-        //             fr.Seek(-offset, SeekOrigin.End);
-                   
-        //             fw.WriteByte((byte)fr.ReadByte());
-        //         }
-        // }
     }
 
     static void Main()
